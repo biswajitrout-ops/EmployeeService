@@ -18,7 +18,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class AuthEntryPoint implements AuthenticationEntryPoint, Serializable {
 
-	private static final long serialVersionUID = -3258940849365582322L;
+	private static final long serialVersionUID = -2947504976975977591L;
 
 	@Override
 	public void commence(HttpServletRequest request, HttpServletResponse response,

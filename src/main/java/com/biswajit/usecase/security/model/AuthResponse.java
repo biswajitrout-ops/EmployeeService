@@ -9,15 +9,15 @@ import java.io.Serializable;
  */
 public class AuthResponse implements Serializable {
 
-	private static final long serialVersionUID = 4592308383661198479L;
+	private static final long serialVersionUID = -717330553651674609L;
 
-	private final String token;
-
-	public AuthResponse(String jwttoken) {
-		this.token = jwttoken;
+	public AuthResponse(String jwtToken) {
+		this.token = jwtToken;
 	}
 
 	public String getToken() {
 		return this.token;
 	}
+
+	private final String token;
 }

@@ -38,24 +38,19 @@ public class AuthenticationController {
 	@Autowired
 	private UserDetailsService inMemoryUserDetailsService;
 
-	@RequestMapping(value = "/authenticate", method = RequestMethod.POST)
+	@RequestMapping(value = "/token", method = RequestMethod.POST)
 	public ResponseEntity<?> createAuthenticationToken(@RequestBody AuthRequest authenticationRequest)
 			throws Exception {
-
 		authenticate(authenticationRequest.getUsername(), authenticationRequest.getPassword());
-
 		final UserDetails userDetails = inMemoryUserDetailsService
 				.loadUserByUsername(authenticationRequest.getUsername());
-
 		final String token = jwtToken.generateToken(userDetails);
-
 		return ResponseEntity.ok(new AuthResponse(token));
 	}
 
 	private void authenticate(String username, String password) throws Exception {
 		Objects.requireNonNull(username);
 		Objects.requireNonNull(password);
-
 		try {
 			authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
 		} catch (DisabledException e) {
