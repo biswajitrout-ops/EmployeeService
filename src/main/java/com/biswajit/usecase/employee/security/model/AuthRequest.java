@@ -1,4 +1,4 @@
-package com.biswajit.usecase.security.model;
+package com.biswajit.usecase.employee.security.model;
 
 import java.io.Serializable;
 

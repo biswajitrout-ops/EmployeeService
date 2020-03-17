@@ -1,4 +1,4 @@
-package com.biswajit.usecase.security.config;
+package com.biswajit.usecase.employee.security.config;
 
 import java.io.IOException;
 
@@ -15,7 +15,7 @@ import org.springframework.security.web.authentication.WebAuthenticationDetailsS
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
-import com.biswajit.usecase.security.UserDetService;
+import com.biswajit.usecase.employee.security.UserDetService;
 
 import io.jsonwebtoken.ExpiredJwtException;
 

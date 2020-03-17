@@ -1,4 +1,4 @@
-package com.biswajit.usecase.security.config;
+package com.biswajit.usecase.employee.security.config;
 
 import java.io.Serializable;
 import java.util.Date;

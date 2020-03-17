@@ -1,4 +1,4 @@
-package com.biswajit.usecase.security;
+package com.biswajit.usecase.employee.security;
 
 import java.util.Objects;
 
@@ -16,9 +16,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.biswajit.usecase.security.config.JWTToken;
-import com.biswajit.usecase.security.model.AuthRequest;
-import com.biswajit.usecase.security.model.AuthResponse;
+import com.biswajit.usecase.employee.security.config.JWTToken;
+import com.biswajit.usecase.employee.security.model.AuthRequest;
+import com.biswajit.usecase.employee.security.model.AuthResponse;
 
 /**
  * 

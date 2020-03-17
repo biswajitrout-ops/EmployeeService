@@ -1,4 +1,4 @@
-package com.biswajit.usecase.security.config;
+package com.biswajit.usecase.employee.security.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -15,7 +15,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-import com.biswajit.usecase.security.AuthEntryPoint;
+import com.biswajit.usecase.employee.security.AuthEntryPoint;
 
 /**
  * 
@@ -60,8 +60,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		httpSecurity.csrf().disable()
 				// dont authenticate this particular request
 				.authorizeRequests().antMatchers("/token").permitAll().
-				antMatchers("/employeeservice/api/v1/employee").permitAll().
-				antMatchers("/employeeservice/api/v1/company/").permitAll().
 				// all other requests need to be authenticated
 				anyRequest().authenticated().and().
 				// make sure we use stateless session; session won't be used to
