@@ -23,12 +23,12 @@ public class EmployeeService {
 
 	/**
 	 * 
-	 * @param employee
+	 * @param employeeData
 	 * @return
 	 * @throws EmployeeServiceException
 	 */
-	public EmployeeVO createEmployee(EmployeeTO employee) throws EmployeeServiceException {
-		String message = employeeComponent.createEmployee(employee);
+	public EmployeeVO createEmployee(EmployeeTO employeeData) throws EmployeeServiceException {
+		String message = employeeComponent.createEmployee(employeeData);
 		if ("Success".equalsIgnoreCase(message)) {
 			return constructDynamicMessages("200", "The Employee record created Successfully");
 		} else if ("RecordExists".equalsIgnoreCase(message)) {
@@ -67,6 +67,39 @@ public class EmployeeService {
 		} else {
 			return constructDynamicMessages("415", "Not a single Employee record exist for the given Employee ID");
 		}
+	}
+
+	/**
+	 * 
+	 * @param employeeID
+	 * @param employeeData
+	 * @return
+	 * @throws EmployeeServiceException
+	 */
+	public EmployeeVO updateEmployee(String employeeID, EmployeeTO employeeData) throws EmployeeServiceException {
+		String message = employeeComponent.updateEmployee(employeeID, employeeData);
+		if ("Success".equalsIgnoreCase(message)) {
+			return constructDynamicMessages("200", "The Employee record updated Successfully");
+		} else if ("NoRecordExists".equalsIgnoreCase(message)) {
+			return constructDynamicMessages("425", "No Employee record exists, to update");
+		} else
+			return null;
+	}
+
+	/**
+	 * 
+	 * @param employeeID
+	 * @return
+	 * @throws EmployeeServiceException
+	 */
+	public EmployeeVO deleteEmployee(String employeeID) throws EmployeeServiceException {
+		String message = employeeComponent.deleteEmployee(employeeID);
+		if ("Success".equalsIgnoreCase(message)) {
+			return constructDynamicMessages("200", "The Employee record deleted Successfully");
+		} else if ("NoRecordExists".equalsIgnoreCase(message)) {
+			return constructDynamicMessages("420", "No Employee record exists, to delete");
+		} else
+			return null;
 	}
 
 	/**

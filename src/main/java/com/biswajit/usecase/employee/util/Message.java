@@ -67,30 +67,9 @@ public class Message implements Serializable {
 		this.responseMessage = responseMessage;
 	}
 
-	/**
-	 * Gets the response type.
-	 *
-	 * @return the responseType
-	 */
-	public String getResponseType() {
-		return responseType;
-	}
-
-	/**
-	 * Sets the response type.
-	 *
-	 * @param responseType the responseType to set
-	 */
-	public void setResponseType(String responseType) {
-		this.responseType = responseType;
-	}
-
 	/** The response code. */
 	private String responseCode = null;
 
 	/** The response message. */
 	private String responseMessage = null;
-
-	/** The response type. */
-	private String responseType = null;
 }

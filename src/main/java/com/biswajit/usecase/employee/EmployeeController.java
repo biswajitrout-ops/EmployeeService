@@ -13,10 +13,12 @@ import org.springframework.context.annotation.Lazy;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -67,6 +69,19 @@ public class EmployeeController {
 	@GetMapping("/employees")
 	public List<EmployeeTO> getAllEmployees() throws EmployeeServiceException {
 		return employeeRepository.findAll();
+	}
+
+	@CrossOrigin
+	@PutMapping("/updateEmployee/{id}")
+	public EmployeeVO updateEmployee(@PathVariable(value = "id") String employeeId,
+			@Valid @RequestBody EmployeeTO employeeDetails) throws EmployeeServiceException {
+		return employeeService.updateEmployee(employeeId, employeeDetails);
+	}
+
+	@CrossOrigin
+	@DeleteMapping("/deleteEmployee/{id}")
+	public EmployeeVO deleteEmployee(@PathVariable(value = "id") String employeeId) throws EmployeeServiceException {
+		return employeeService.deleteEmployee(employeeId);
 	}
 
 	@ResponseStatus(HttpStatus.BAD_REQUEST)

@@ -24,16 +24,17 @@ public class EmployeeDAO {
 	private @Autowired @Lazy(value = true) EmployeeRepository employeeRepository;
 
 	/**
+	 * This method creates an employee record
 	 * 
-	 * @param employee
+	 * @param employeeData
 	 * @return
 	 * @throws EmployeeServiceException
 	 */
-	public String createEmployee(EmployeeTO employee) throws EmployeeServiceException {
+	public String createEmployee(EmployeeTO employeeData) throws EmployeeServiceException {
 		String strMessage = "Failure";
-		EmployeeTO checkEmployeeTO = employeeRepository.findByEmailID(employee.getEmailId().trim());
-		if (null == checkEmployeeTO) {
-			employeeRepository.save(employee);
+		EmployeeTO checkEmployee = employeeRepository.findByEmailID(employeeData.getEmailId().trim());
+		if (null == checkEmployee) {
+			employeeRepository.save(employeeData);
 			strMessage = "Success";
 		} else {
 			strMessage = "RecordExists";
@@ -42,6 +43,7 @@ public class EmployeeDAO {
 	}
 
 	/**
+	 * This method retrieves list of employee details based on company name
 	 * 
 	 * @param companyName
 	 * @return
@@ -65,6 +67,7 @@ public class EmployeeDAO {
 	}
 
 	/**
+	 * This method retrieves employees details based on employee ID
 	 * 
 	 * @param employeeID
 	 * @return
@@ -79,6 +82,49 @@ public class EmployeeDAO {
 		} else {
 			return null;
 		}
+	}
+
+	/**
+	 * This method updates an employee record based on employee ID and other input
+	 * 
+	 * @param employeeID
+	 * @param employeeData
+	 * @return
+	 * @throws EmployeeServiceException
+	 */
+	public String updateEmployee(String employeeID, EmployeeTO employeeData) throws EmployeeServiceException {
+		String strMessage = "Failure";
+		EmployeeTO checkEmployee = employeeRepository.findByEmployeeID(employeeID.trim());
+		if (null != checkEmployee) {
+			checkEmployee.setFirstName(employeeData.getFirstName());
+			checkEmployee.setLastName(employeeData.getLastName());
+			checkEmployee.setEmailId(employeeData.getEmailId());
+			checkEmployee.setCompanyName(employeeData.getCompanyName());
+			employeeRepository.save(checkEmployee);
+			strMessage = "Success";
+		} else {
+			strMessage = "NoRecordExists";
+		}
+		return strMessage;
+	}
+
+	/**
+	 * This method deletes an employee record based on employee ID
+	 * 
+	 * @param employeeID
+	 * @return
+	 * @throws EmployeeServiceException
+	 */
+	public String deleteEmployee(String employeeID) throws EmployeeServiceException {
+		String strMessage = "Failure";
+		EmployeeTO checkEmployeeTO = employeeRepository.findByEmployeeID(employeeID.trim());
+		if (null != checkEmployeeTO) {
+			employeeRepository.delete(checkEmployeeTO);
+			strMessage = "Success";
+		} else {
+			strMessage = "NoRecordExists";
+		}
+		return strMessage;
 	}
 
 	/**
