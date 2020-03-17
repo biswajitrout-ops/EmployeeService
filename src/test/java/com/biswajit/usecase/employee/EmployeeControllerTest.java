@@ -27,11 +27,10 @@ public class EmployeeControllerTest {
 	@Test
 	public void createEmployeeSuccess() throws URISyntaxException {
 		RestTemplate restTemplate = new RestTemplate();
-		final String baseUrl = "http://localhost:" + randomServerPort + "/employeeservice/api/v1/employee";
-		URI uri = new URI(baseUrl);
+		final String apiURL = "http://localhost:" + randomServerPort + "/employeeservice/api/v1/employee";
+		URI apiURI = new URI(apiURL);
 
 		EmployeeTO employee = new EmployeeTO();
-
 		employee.setFirstName("Biswajit");
 		employee.setLastName("Rout");
 		employee.setEmailId("biswajit.rout@accenture.com");
@@ -40,8 +39,28 @@ public class EmployeeControllerTest {
 		HttpHeaders headers = new HttpHeaders();
 		headers.set("X-COM-PERSIST", "true");
 
+		/* String tokenURL = "http://localhost:" + randomServerPort + "/token";
+		URI tokenURI = new URI(tokenURL);
+		AuthRequest user = new AuthRequest();
+		user.setUsername("admin");
+		user.setPassword("password");
+		HttpEntity<AuthRequest> tokenRequest = new HttpEntity<>(user, headers);
+		ResponseEntity<String> tokenResult = restTemplate.postForEntity(tokenURI, tokenRequest, String.class);
+		ObjectMapper mapper = new ObjectMapper();
+		Map<String, String> map = null;
+		try {
+			map = mapper.readValue(tokenResult.getBody().toString(), new TypeReference<Map<String, String>>() {
+			});
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		String token = map.get("token");
+		System.out.println("TOKENNNNNNN....." + token);
+		headers.set("Authorization", "Bearer" + token); */
+
 		HttpEntity<EmployeeTO> request = new HttpEntity<>(employee, headers);
-		ResponseEntity<String> result = restTemplate.postForEntity(uri, request, String.class);
+		ResponseEntity<String> result = restTemplate.postForEntity(apiURI, request, String.class);
 
 		System.out.println("Biswajit11111....." + result);
 
@@ -64,6 +83,26 @@ public class EmployeeControllerTest {
 		HttpHeaders headers = new HttpHeaders();
 		headers.set("X-COM-PERSIST", "true");
 
+		/* String tokenURL = "http://localhost:" + randomServerPort + "/token";
+		URI tokenURI = new URI(tokenURL);
+		AuthRequest user = new AuthRequest();
+		user.setUsername("admin");
+		user.setPassword("password");
+		HttpEntity<AuthRequest> tokenRequest = new HttpEntity<>(user, headers);
+		ResponseEntity<String> tokenResult = restTemplate.postForEntity(tokenURI, tokenRequest, String.class);
+		ObjectMapper mapper = new ObjectMapper();
+		Map<String, String> map = null;
+		try {
+			map = mapper.readValue(tokenResult.getBody().toString(), new TypeReference<Map<String, String>>() {
+			});
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		String token = map.get("token");
+		System.out.println("TOKENNNNNNN....." + token);
+		headers.set("Authorization", "Bearer" + token); */
+
 		HttpEntity<EmployeeTO> request = new HttpEntity<>(employee, headers);
 		ResponseEntity<String> result = restTemplate.postForEntity(uri, request, String.class);
 		System.out.println("Biswajit22222....." + result);
@@ -74,25 +113,13 @@ public class EmployeeControllerTest {
 	@Test
 	public void getEmployeeByCompanyNameSuccess() throws URISyntaxException {
 		RestTemplate restTemplate = new RestTemplate();
-		final String baseUrl = "http://localhost:" + randomServerPort + "/employeeservice/api/v1/company/Accenture";
+		final String baseUrl = "http://localhost:" + randomServerPort + "/employeeservice/api/v1/employees";
 		URI uri = new URI(baseUrl);
 
 		ResponseEntity<String> result = restTemplate.getForEntity(uri, String.class);
 		System.out.println("Biswajit33333....." + result);
 
 		Assertions.assertEquals(200, result.getStatusCodeValue());
-	}
-
-	@Test
-	public void getEmployeeByCompanyNameFailure() throws URISyntaxException {
-		RestTemplate restTemplate = new RestTemplate();
-		final String baseUrl = "http://localhost:" + randomServerPort + "/employeeservice/api/v1/company/HP";
-		URI uri = new URI(baseUrl);
-
-		ResponseEntity<String> result = restTemplate.getForEntity(uri, String.class);
-		System.out.println("Biswajit44444....." + result);
-
-		Assertions.assertEquals(410, result.getStatusCodeValue());
 	}
 
 }
